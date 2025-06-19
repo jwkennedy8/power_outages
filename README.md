@@ -63,11 +63,27 @@ I plotted the distribution of outage durations by climate region to see how outa
  frameborder="0"
  ></iframe>
 
+ ## INTERESTING AGGREGATES
+
+ The table below shows the occurances of each type of outage by climate region. Across all regions, we can see severe weather and intentional attacks account for most of the outages. The West region stands out for **equipment failure**,**islanding**, and **system operability disruption** having way more for these categories than all other regions. 
+
+ | CAUSE.CATEGORY                |   Central |   East North Central |   Northeast |   Northwest |   South |   Southeast |   Southwest |   West |   West North Central |   hawaii |
+|:------------------------------|----------:|---------------------:|------------:|------------:|--------:|------------:|------------:|-------:|---------------------:|---------:|
+| equipment failure             |         5 |                    3 |           5 |           2 |       9 |           4 |           5 |     21 |                    1 |      nan |
+| fuel supply emergency         |         4 |                    4 |          14 |           1 |       4 |         nan |           1 |     10 |                  nan |      nan |
+| intentional attack            |        34 |                   20 |         131 |          85 |      28 |           9 |          61 |     31 |                    4 |      nan |
+| islanding                     |         3 |                    1 |           1 |           3 |       2 |         nan |           1 |     28 |                    5 |      nan |
+| public appeal                 |         2 |                    2 |           4 |           2 |      42 |           5 |           1 |      9 |                    2 |      nan |
+| severe weather                |       133 |                  104 |         175 |          25 |     106 |         116 |          10 |     67 |                    4 |        4 |
+| system operability disruption |        10 |                    3 |          14 |           4 |      27 |          16 |           9 |     39 |                  nan |        1 |
+
  # Framing a Prediction Problem
 
- 
+From the data collected, I am creating a regression problem to predict power outage duration based contextual data. The relevant columns that I have selected would be features known at the time of the outage which makes this appropriate for prediciton. I chose to predict duration because it can be a very useful estimate for a supplier to accurately inform customers of the outage duration. As stated earlier, the duration of an outage can significantly affect consumer decision making. To evaluate my models, I will use the **log of mean squared error** to capture the relative error because I do not want super extreme cases to overfit my model to the data.
 
  # Baseline Model
+
+
 
  # Final Model
 
