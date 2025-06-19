@@ -11,14 +11,49 @@ As the world becomes increasingly dependent on technology for everyday life, the
 
 | Column Name | Description                      |
 |------------|----------------------------------|
-| OUTAGE.START.DATE     |  Outage start date (Day,month,year)   |
+| OUTAGE.START.DATE     |  Outage start date (YY-MM-DD)   |
 | OUTAGE.START.TIME      | Outage start time of day (hour,min,sec)  |
-| OUTAGE.RESTORATION.DATE     | Restoration Date (Day,month,year)   |
+| OUTAGE.RESTORATION.DATE     | Restoration Date (YY-MM-DD)   |
 | OUTAGE.RESTORATION.TIME    | Restoration time of day (hour,min,sec)   |
 | CAUSE.CATEGORY     | Generic cause of outage (vandalism, weather etc.)  |
-| CAUSE.CATEGORY.DETAIL     | Short description of cause  |
 | CUSTOMERS.AFFECTED     | Total customers affected by outage   |
-| US._STATE     | desc3   |
+| CLIMATE.REGION     | U.S. Climate regions as specified by National Centers for Environmental Information  |
+| US._STATE     | US State  |
 | IND.PERCEN     | Percentage of Industrial power consumption in state |
 | POPPCT_URBAN     | 	Percentage of the total population of the U.S. state represented by the urban population (in %)   |
 | POPDEN_RURAL    | Population density of the rural areas (persons per square mile) |
+
+# Data Cleaning and Exploratory Data Analysis
+
+## Data Cleaning
+
+Before starting my analysis, I needed to transform a few of the relevant features to datatypes suitable for analysis/regression. First, I found that 58 observations were missing the outage restoration dates and also could not be determined by duration because their corresponding durations were null. I removed all cases where duration could not be determined because that is the feature I am trying to predict. Next, I transformed **OUTAGE.START.TIME** into a new column **OUTAGE.START.HOUR** which is 24 hour format rounded to the nearest full hour. I wanted to explore the relationship between day of the week and duration as well so I derived the day of week from **OUTAGE.START.DATE** to create **start_day**.
+
+The only missing values for **POPDEN_RURAL** where outages in Washington D.C. Since there is no rural population there I filled in 0 for each of these observations. Similiarly, the only missing values for **CLIMATE.REGION** were outages located in Hawaii. Since all cases in Hawaii were missing a region, I filled in 'hawaii' for missing **CLIMATE.REGION**. 
+
+The last relevant columns that had missing values were **CUSTOMERS.AFFECTED** and **IND.PERCEN**. For these columns I used mean value imputation by state.
+
+<iframe src="assets/dataframe_head.html" width="800" height="400" frameborder="0"></iframe>
+
+## UNIVARIATE ANALYSIS
+
+I plotted a historgram of the number of outages with respect to the Industrial power consumption relative to state power. As seen in the plot below, a majority of the outages affect places where the industrial power consumption is around 20-40% of total state consumption. This distribution makes sense because this is in alignment with the proportion of national power consumption by the industiral power sector.
+
+ <iframe
+ src="assets/univariate.html"
+ width="800"
+ height="600"
+ frameborder="0"
+ ></iframe>
+
+## BIVARIATE ANALYSIS
+
+I plotted the distribution of outage durations by climate region to see how outages look by region. I noticed the fourth quartile of the East North Central region was much wider than any of the other regions. This may be due to a combination of the winter months being much harsher in this region as well as a less reliable energy infrastructure. Although not as big as East North Central, the Southwest, Northeast, and West regions also have wide distributions than the remaining regions. Since these three are similar, I can group each set of regions into similar categories based on distribution to simplify my predictive model. 
+
+ <iframe
+ src="assets/bivariate.html"
+ width="800"
+ height="600"
+ frameborder="0"
+ ></iframe>
+
