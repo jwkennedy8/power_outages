@@ -11,6 +11,14 @@ As the world becomes increasingly dependent on technology for everyday life, the
 
 | Column Name | Description                      |
 |------------|----------------------------------|
-| feature1      |  desc1    |
-| feature2      | desc2  |
-| feature3     | desc3   |
+| OUTAGE.START.DATE     |  Outage start date (Day,month,year)   |
+| OUTAGE.START.TIME      | Outage start time of day (hour,min,sec)  |
+| OUTAGE.RESTORATION.DATE     | Restoration Date (Day,month,year)   |
+| OUTAGE.RESTORATION.TIME    | Restoration time of day (hour,min,sec)   |
+| CAUSE.CATEGORY     | Generic cause of outage (vandalism, weather etc.)  |
+| CAUSE.CATEGORY.DETAIL     | Short description of cause  |
+| CUSTOMERS.AFFECTED     | Total customers affected by outage   |
+| US._STATE     | desc3   |
+| IND.PERCEN     | Percentage of Industrial power consumption in state |
+| POPPCT_URBAN     | 	Percentage of the total population of the U.S. state represented by the urban population (in %)   |
+| POPDEN_RURAL    | Population density of the rural areas (persons per square mile) |
