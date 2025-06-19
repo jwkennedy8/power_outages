@@ -33,7 +33,7 @@ The only missing values for **POPDEN_RURAL** where outages in Washington D.C. Si
 
 The last relevant columns that had missing values were **CUSTOMERS.AFFECTED** and **IND.PERCEN**. For these columns I used mean value imputation by state.
 
-<iframe src="assets/dataframe_head.html" width="800" height="400" frameborder="0"></iframe>
+|    |   YEAR | start_day   |   start_time | CLIMATE.REGION     |   CUSTOMERS.AFFECTED | CAUSE.CATEGORY     |   IND.PERCEN |   POPPCT_URBAN |   POPDEN_RURAL |   OUTAGE.DURATION |\n|---:|-------:|:------------|-------------:|:-------------------|---------------------:|:-------------------|-------------:|---------------:|---------------:|------------------:|\n|  0 |   2011 | Friday      |      17      | East North Central |                70000 | severe weather     |      32.2024 |          73.27 |           18.2 |              3060 |\n|  1 |   2014 | Sunday      |      18.6333 | East North Central |               124007 | intentional attack |      35.7276 |          73.27 |           18.2 |                 1 |\n|  2 |   2010 | Tuesday     |      20      | East North Central |                70000 | severe weather     |      37.366  |          73.27 |           18.2 |              3000 |\n|  3 |   2012 | Tuesday     |       4.5    | East North Central |                68200 | severe weather     |      34.4393 |          73.27 |           18.2 |              2550 |\n|  4 |   2015 | Saturday    |       2      | East North Central |               250000 | severe weather     |      29.7795 |          73.27 |           18.2 |              1740 |
 
 ## UNIVARIATE ANALYSIS
 
@@ -56,4 +56,12 @@ I plotted the distribution of outage durations by climate region to see how outa
  height="600"
  frameborder="0"
  ></iframe>
+
+ # Framing a Prediction Problem
+
+
+
+ # Baseline Model
+
+ # Final Model
 
