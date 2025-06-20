@@ -1,4 +1,4 @@
-# How long will the Power Be Out?
+# How long will your Power Be Out?
 Power Outage Data Analysis and Predictive Models
 
 Created by: Jack Kennedy
@@ -8,15 +8,14 @@ Created by: Jack Kennedy
 - [Introduction](#introduction)
 
     -[Relevant Columns](#relevant-columns)
-    
 - [Data Cleaning and Exploratory Data Analysis](#data-cleaning-and-exploratory-data-analysis)
-    
+
     -[Data Cleaning](#data-cleaning)
-    
+
     -[Univariate Analysis](#univariate-analysis)
-    
+
     -[Bivariate Analysis](#bivariate-analysis)
-    
+
     -[Interesting Aggregate](#interesting-aggregate)
 
 - [Framing a Prediction Problem](#framing-a-prediction-problem)
@@ -118,9 +117,25 @@ From the data collected, I am creating a regression problem to predict power out
 # Baseline Model
 
 To get started, I built a linear regression model using **CLIMATE.REGION**, **CAUSE.CATEGORY**, and **CUSTOMERS.AFFECTED**.
-This model used the **sklearn LinearRegression** module with **GridSearchCV** to for cross-validation and to add a polynomial feature for **CUSTOMERS.AFFECTED** as it was the only numerical feature I used for this initial model. I one hot encoded **CLIMATE.REGION** and  **CAUSE.CATEGORY**. After training this model on the dataset, the best score corresponded to a polynomial feature of degree 1 and MSE of **35098489.63851191 minutes^2**. Using the exact same features without cross validation, the model had an MSE of **28957556.861313283 minutes^2**. 
+This model used the **sklearn LinearRegression** module. I one hot encoded **CLIMATE.REGION** and  **CAUSE.CATEGORY** and used an 80-20 train-test split. The training MSE was **18390775.11776536 minutes^2** and the test MSE was **73532246.3912735 minutes^2**
 
-These results mean that this models predictions on unseen data are **~5924 minutes** off on average which is around 4 days! Given the fact that the data has a mean outage duration of **~2625 minutes**, this model performs extremely poor on both seen and unseen data.
+These results mean that this models predictions on unseen data are **~8575 minutes** off on average which is around 6 days! Given the fact that the data has a mean outage duration of **~2625 minutes**, this model performs poor on both seen and unseen data.
 
 # Final Model
+
+To improve my model, I include more features that I explored earlier such as **IND.PERCEN** and a custom feature **start_hour** which was derived from **OUTAGE.START.TIME**. Since my objective is to reduce error on unseen data in particular, I chose to use Ridge Regression with a range of regularization penalties along with turning **IND.PERCEN**, **CUSTOMERS.AFFECTED**, and **YEAR** into polynomial features. I also transformed **CLIMATE.REGION** into three categories to simplify the encoding since the box plots from earlier showed that many of the distributions looked similiar by region. Each region was classified into 'high', 'med', or 'low' risk of having a extended outage based on the distribution of the region.
+
+To implement the model, I used sklearns **GridSearchCV** module to search for the best parameters for the regularization penalties and polynomial feature degrees. I created function transformers for **start_hour** and **CLIMATE.REGION** so that the model can make predictions based on the same features in the original dataset. 
+
+The fit model had the following results: 
+
+| Dataset | Minutes^2                      |
+|------------|----------------------------------|
+| Training     |  17621599.81673342  |
+| Test     | 70651184.39905676  |
+
+Although the model showed improvement from the baseline, it only predicted **~170 minutes** closer on average for the test dataset. For future improvement, I would recommend investigating energy suppliers by area of outage to supplement this dataset as well as energy infrastucture data such as type of equipment used, and how recently it was updated. 
+
+
+
 
