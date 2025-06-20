@@ -134,8 +134,6 @@ The fit model had the following results:
 | Training     |  17621599.81673342  |
 | Test     | 70651184.39905676  |
 
-Although the model showed improvement from the baseline, it only predicted **~170 minutes** closer on average for the test dataset. For future improvement, I would recommend investigating energy suppliers by area of outage to supplement this dataset as well as energy infrastucture data such as type of equipment used, and how recently it was updated. 
-
-
+Although the model showed improvement from the baseline, it only predicted **~170 minutes** closer on average for the test dataset. For future improvement, I would recommend investigating energy suppliers by area of outage to supplement this dataset as well as energy infrastucture data such as type of equipment used, and how recently it was updated.
 
 
