@@ -6,12 +6,19 @@ Created by: Jack Kennedy
 # Table of Contents
 
 - [Introduction](#introduction)
+
     -[Relevant Columns](#relevant-columns)
+    
 - [Data Cleaning and Exploratory Data Analysis](#data-cleaning-and-exploratory-data-analysis)
+    
     -[Data Cleaning](#data-cleaning)
+    
     -[Univariate Analysis](#univariate-analysis)
+    
     -[Bivariate Analysis](#bivariate-analysis)
+    
     -[Interesting Aggregate](#interesting-aggregate)
+
 - [Framing a Prediction Problem](#framing-a-prediction-problem)
 - [Baseline Model](#baseline-model)
 - [Final Model](#final-model)
