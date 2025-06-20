@@ -52,9 +52,19 @@ I plotted a historgram of the number of outages with respect to the Industrial p
  frameborder="0"
  ></iframe>
 
+ 
 ## BIVARIATE ANALYSIS
 
-I plotted the distribution of outage durations by climate region to see how outages look by region. I noticed the fourth quartile of the East North Central region was much wider than any of the other regions. This may be due to a combination of the winter months being much harsher in this region as well as a less reliable energy infrastructure. Although not as big as East North Central, the Southwest, Northeast, and West regions also have wide distributions than the remaining regions. Since these three are similar, I can group each set of regions into similar categories based on distribution to simplify my predictive model. 
+I also plotted a histogram for the mean customers affected by state which revealed that there were no values for **CUSTOMERS.AFFECTED** in the initial dataset for Montana and South Dakota. This was problematic at first because I had originally used mean value imputation by state for all **CUSTOMERS.AFFECTED**. I used the mean for North Dakota (34.5k) as a value to impute for both states due to similar population sizes and location.
+
+ <iframe
+ src="assets/by_state_hist.html"
+ width="800"
+ height="600"
+ frameborder="0"
+ ></iframe>
+
+Next, I plotted the distribution of outage durations by climate region to see how outages look by region. I noticed the fourth quartile of the East North Central region was much wider than any of the other regions. This may be due to a combination of the winter months being much harsher in this region as well as a less reliable energy infrastructure. Although not as big as East North Central, the Southwest, Northeast, and West regions also have wide distributions than the remaining regions. Since these three are similar, I can group each set of regions into similar categories based on distribution to simplify my predictive model. 
 
  <iframe
  src="assets/bivariate.html"
@@ -63,7 +73,9 @@ I plotted the distribution of outage durations by climate region to see how outa
  frameborder="0"
  ></iframe>
 
- ## INTERESTING AGGREGATES
+
+## INTERESTING AGGREGATE
+
 
  The table below shows the occurances of each type of outage by climate region. Across all regions, we can see severe weather and intentional attacks account for most of the outages. The West region stands out for **equipment failure**,**islanding**, and **system operability disruption** having way more for these categories than all other regions. 
 
@@ -79,11 +91,14 @@ I plotted the distribution of outage durations by climate region to see how outa
 
  # Framing a Prediction Problem
 
-From the data collected, I am creating a regression problem to predict power outage duration based contextual data. The relevant columns that I have selected would be features known at the time of the outage which makes this appropriate for prediciton. I chose to predict duration because it can be a very useful estimate for a supplier to accurately inform customers of the outage duration. As stated earlier, the duration of an outage can significantly affect consumer decision making. To evaluate my models, I will use the **log of mean squared error** to capture the relative error because I do not want super extreme cases to overfit my model to the data.
+From the data collected, I am creating a regression problem to predict power outage duration based contextual data. The relevant columns that I have selected would be features known at the time of the outage which makes this appropriate for prediciton. I chose to predict duration because it can be a very useful estimate for a supplier to accurately inform customers of the outage duration. As stated earlier, the duration of an outage can significantly affect consumer decision making. To evaluate my models, I will use the **mean squared error** to capture the error because I want my model to be sensitive to large errors as longer outages are the most consequential.
 
- # Baseline Model
+# Baseline Model
 
+To get started, I build a linear regression model using **CLIMATE.REGION**, **CAUSE.CATEGORY**, and **CUSTOMERS.AFFECTED**.
+This model used the **sklearn LinearRegression Module** with **GridSearchCV** to for cross-validation and to add a polynomial feature for **CUSTOMERS.AFFECTED** as it was the only numerical feature I used for this initial model. I one hot encoded **CLIMATE.REGION** and  **CAUSE.CATEGORY**. After training this model on the dataset, the best score corresponded to a polynomial feature of degree 1 and MSE of **35098489.63851191 minutes^2**. Using the exact same features without cross validation, the model had an MSE of **28957556.861313283 minutes^2**. 
 
+These results mean that this models predictions on unseen data are **~5924 minutes** off on average which is around 4 days! Given the fact that the data has a mean outage duration of **~2625 minutes**, this model performs extremely poor on both seen and unseen data.
 
- # Final Model
+# Final Model
 
