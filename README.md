@@ -1,15 +1,17 @@
 # How long will the Power Be Out?
 Power Outage Data Analysis and Predictive Models
+
 Created by: Jack Kennedy
 
 # Table of Contents
+
 - [Introduction](#introduction)
     -[Relevant Columns](#relevant-columns)
 - [Data Cleaning and Exploratory Data Analysis](#data-cleaning-and-exploratory-data-analysis)
     -[Data Cleaning](#data-cleaning)
-    -[UNIVARIATE ANALYSIS](#univariate-analysis)
-    -[BIVARIATE ANALYSIS](#bivariate-analysis)
-    -[INTERESTING AGGREGATE](#interesting-aggregate)
+    -[Univariate Analysis](#univariate-analysis)
+    -[Bivariate Analysis](#bivariate-analysis)
+    -[Interesting Aggregate](#interesting-aggregate)
 - [Framing a Prediction Problem](#framing-a-prediction-problem)
 - [Baseline Model](#baseline-model)
 - [Final Model](#final-model)
@@ -108,7 +110,7 @@ From the data collected, I am creating a regression problem to predict power out
 
 # Baseline Model
 
-To get started, I build a linear regression model using **CLIMATE.REGION**, **CAUSE.CATEGORY**, and **CUSTOMERS.AFFECTED**.
+To get started, I built a linear regression model using **CLIMATE.REGION**, **CAUSE.CATEGORY**, and **CUSTOMERS.AFFECTED**.
 This model used the **sklearn LinearRegression** module with **GridSearchCV** to for cross-validation and to add a polynomial feature for **CUSTOMERS.AFFECTED** as it was the only numerical feature I used for this initial model. I one hot encoded **CLIMATE.REGION** and  **CAUSE.CATEGORY**. After training this model on the dataset, the best score corresponded to a polynomial feature of degree 1 and MSE of **35098489.63851191 minutes^2**. Using the exact same features without cross validation, the model had an MSE of **28957556.861313283 minutes^2**. 
 
 These results mean that this models predictions on unseen data are **~5924 minutes** off on average which is around 4 days! Given the fact that the data has a mean outage duration of **~2625 minutes**, this model performs extremely poor on both seen and unseen data.
